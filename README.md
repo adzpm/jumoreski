@@ -1,1 +1,3 @@
-# jumoreski
+# Jumoreski
+
+## Version 1.0.0
