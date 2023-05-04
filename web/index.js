@@ -44,3 +44,4 @@ let Application = Vue.createApp({
 })
 
 let wm = Application.mount('#app')
+
