@@ -1,0 +1,20 @@
+.rounded-4 {
+    border-radius: 0.4rem !important;
+}
+
+.rounded-5 {
+    border-radius: 0.5rem !important;
+}
+
+.rounded-10 {
+    border-radius: 1rem !important;
+}
+
+#parallax {
+    background-image: url(https://play-lh.googleusercontent.com/ovFbGElmfBf5gqcNhKLDkNIMMf_54hJ02G6lNTQFYsmK4rqwBjKrbl24RiAPOLiVkdk),
+    url(https://sticker-collection.com/stickers/plain/peperare/512/a857faad-f9e2-4acf-a316-203a007364ddfile_3528197.webp),
+    url(https://sticker-collection.com/stickers/plain/frogthepepe/512/fc38258a-e903-4866-9c48-87419d09a481file_2926650.webp);
+    /*background-repeat: no-repeat;*/
+    background-position: center;
+    transition: all .4s ease-out;
+}
