@@ -23,17 +23,21 @@ axios.defaults.withCredentials = true
 let Application = Vue.createApp({
     data: function () {
         return {
-            anek: `— Я сделал быстрейший калькулятор в мире.
-— Ну-ка пусть посчитает делители 29.
-— 1, 2, 29, 58, 4, 90.
-— Неправильно.
-— Зато быстро.`,
+            anek: '',
         }
     },
 
     methods: {
         formatSpaces: function (text) {
             return text.replaceAll(/\r?\n/g, `<br>`)
+        },
+
+        getRandomAnek: function() {
+            axios.get('http://127.0.0.1:8080/random').then(
+                response => {
+                    this.anek = response.data.text
+                }
+            )
         }
     },
 
