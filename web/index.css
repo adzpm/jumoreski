@@ -18,3 +18,18 @@
     background-position: center;
     transition: all .4s ease-out;
 }
+
+.show-card-enter-active,
+.show-card-leave-active {
+    transition: all .25s ease;
+}
+
+.show-card-enter-from {
+    transform: translateY(-100%);
+    opacity: 0;
+}
+
+.show-card-leave-to {
+    transform: translateY(100%);
+    opacity: 0;
+}

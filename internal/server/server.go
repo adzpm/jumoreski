@@ -6,6 +6,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	jsoniter "github.com/json-iterator/go"
 	"gorm.io/gorm"
+	"strings"
 	"time"
 )
 
@@ -40,11 +41,18 @@ func (s *Server) Start() error {
 }
 
 func (s *Server) randomHandler(c *fiber.Ctx) error {
-	post := &models.Post{}
+	post := &models.StoragePost{}
 
-	if err := s.storage.Raw("SELECT * FROM posts ORDER BY RANDOM() LIMIT 1;").Scan(&post).Error; err != nil {
+	if err := s.storage.Raw("SELECT * FROM posts where is_active = true ORDER BY RANDOM() LIMIT 1;").Scan(&post).Error; err != nil {
 		return c.Status(fiber.StatusInternalServerError).JSON("ошыбка")
 	}
 
-	return c.Status(fiber.StatusOK).JSON(post)
+	response := &models.ResponsePost{
+		ID:       post.ID,
+		Text:     post.Text,
+		Images:   strings.Split(post.Images, ","),
+		IsActive: post.IsActive,
+	}
+
+	return c.Status(fiber.StatusOK).JSON(response)
 }

@@ -15,7 +15,7 @@ const (
 )
 
 func main() {
-	stor, err := storage.NewStorage(&storage.Config{
+	st, err := storage.NewStorage(&storage.Config{
 		DatabasePath: databasePath,
 	})
 
@@ -29,23 +29,23 @@ func main() {
 			Port:      port,
 			FrontPath: frontPath,
 		},
-		stor,
+		st,
 	)
 
 	if err = srv.Start(); err != nil {
 		panic(err)
 	}
 
-	// prs := parser.NewParser(
+	//prs := parser.NewParser(
 	//	&parser.Config{
 	//		AccessToken: token,
 	//		GroupDomain: groupDomain,
 	//	},
-	//	stor,
-	// )
-
-	// if err = prs.Start(); err != nil {
+	//	st,
+	//)
+	//
+	//if err = prs.Start(); err != nil {
 	//	log.Print("parsing error: ", err)
-	// }
+	//}
 
 }

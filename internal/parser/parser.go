@@ -1,6 +1,7 @@
 package parser
 
 import (
+	"github.com/SevereCloud/vksdk/v2/object"
 	"github.com/adzpm/jumoreski/models"
 	"gorm.io/gorm"
 	"log"
@@ -15,11 +16,11 @@ const (
 
 type (
 	Parser struct {
-		cfg     *Config        // cfg is a config
-		storage *gorm.DB       // storage is a storage
-		vkapi   *api.VK        // vkapi is a vk api
-		count   int            // count is a count of posts
-		Posts   []*models.Post // Posts is a slice of posts
+		cfg     *Config               // cfg is a config
+		storage *gorm.DB              // storage is a storage
+		vkapi   *api.VK               // vkapi is a vk api
+		count   int                   // count is a count of posts
+		Posts   []*models.StoragePost // Posts is a slice of posts
 	}
 )
 
@@ -54,7 +55,7 @@ func (p *Parser) Start() error {
 func (p *Parser) parseWall() error {
 	var (
 		err      error
-		allPosts = make([]*models.Post, 0)
+		allPosts = make([]*models.StoragePost, 0)
 		resp     api.WallGetResponse
 	)
 
@@ -71,7 +72,28 @@ func (p *Parser) parseWall() error {
 		}
 
 		for _, post := range resp.Items {
-			if err = p.storage.Create(&models.Post{
+			if post.MarkedAsAds {
+				continue
+			}
+
+			images := models.Images{}
+
+			for _, attachment := range post.Attachments {
+				switch attachment.Type {
+				case object.AttachmentTypeGraffiti:
+					images = append(images, attachment.Graffiti.Photo586)
+				case object.AttachmentTypePhoto:
+					images = append(images, attachment.Photo.Sizes[len(attachment.Photo.Sizes)-1].URL)
+				case object.AttachmentTypePostedPhoto:
+					images = append(images, attachment.PostedPhoto.Photo604)
+				case object.AttachmentTypeDoc:
+					if attachment.Doc.Ext == "gif" {
+						images = append(images, attachment.Doc.URL)
+					}
+				}
+			}
+
+			if err = p.storage.Create(&models.StoragePost{
 				Text:    post.Text,
 				Watches: post.Views.Count,
 			}).Error; err != nil {

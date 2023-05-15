@@ -2,15 +2,19 @@ module github.com/adzpm/jumoreski
 
 go 1.19
 
-require github.com/SevereCloud/vksdk/v2 v2.16.0
+require (
+	github.com/SevereCloud/vksdk/v2 v2.16.0
+	github.com/gofiber/fiber/v2 v2.45.0
+	github.com/json-iterator/go v1.1.12
+	gorm.io/driver/sqlite v1.5.0
+	gorm.io/gorm v1.25.1
+)
 
 require (
 	github.com/andybalholm/brotli v1.0.5 // indirect
-	github.com/gofiber/fiber/v2 v2.45.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.5 // indirect
-	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/klauspost/compress v1.16.3 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.18 // indirect
@@ -30,6 +34,4 @@ require (
 	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
 	golang.org/x/sys v0.8.0 // indirect
 	golang.org/x/text v0.8.0 // indirect
-	gorm.io/driver/sqlite v1.5.0 // indirect
-	gorm.io/gorm v1.25.1 // indirect
 )

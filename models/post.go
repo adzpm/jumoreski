@@ -1,8 +1,17 @@
 package models
 
 type (
-	Post struct {
-		Text    string `json:"text"`
-		Watches int    `json:"watches"`
+	StoragePost struct {
+		ID       uint64 `json:"id"`
+		Text     string `json:"text"`
+		Images   string `json:"images"`
+		IsActive bool   `json:"is_active"`
+	}
+
+	ResponsePost struct {
+		ID       uint64   `json:"id"`
+		Text     string   `json:"text"`
+		Images   []string `json:"images"`
+		IsActive bool     `json:"is_active"`
 	}
 )

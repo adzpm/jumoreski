@@ -12,7 +12,7 @@ func NewStorage(cfg *Config) (*gorm.DB, error) {
 		return nil, err
 	}
 
-	if err = db.AutoMigrate(&models.Post{}); err != nil {
+	if err = db.AutoMigrate(&models.StoragePost{}); err != nil {
 		return nil, err
 	}
 

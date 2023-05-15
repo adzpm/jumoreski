@@ -16,25 +16,42 @@
 <script src="source/bootstrap/js/bootstrap.bundle.js"></script>
 <script src="source/vue.global.js"></script> <!-- TODO: replace to prod -->
 
-<div id="app" class="container min-vh-100 d-flex flex-column justify-content-between mx-auto px-5" style="max-width: 1000px">
-    <div class="align-self-center">
-        <div class="rounded-10 my-5 shadow-lg p-5 text-start w-100 bg-light">
-            <h1 class="display-3 fw-bolder mb-5">Случайная юмореска</h1>
-            <p class="lead fs-3" v-html="formatSpaces(anek)"></p>
+<div id="app">
+    <div class="container min-vh-100 d-flex flex-column justify-content-start mx-auto p-5"
+         style="max-width: 800px; min-width: 800px">
+
+        <div class="w-100">
+            <a href="#" class="btn btn-lg rounded-10 btn-primary border-0 shadow-lg p-3 w-100" @click="getRandomAnek()"
+            >Крутить рулетку</a>
         </div>
-        <a href="#" class="btn btn-lg rounded-10 btn-primary border-0 shadow-lg p-3 w-100" @click="getRandomAnek()">Крутить рулетку</a>
-    </div>
+
+        <div class="align-self-center">
+            <div class="rounded-10 my-5 shadow-lg p-5 text-start w-100 bg-light">
+                <h1 class="display-3 fw-bolder mb-5">Случайная юмореска</h1>
+                <p class="lead fs-4" v-html="formatSpaces(obj.text)"></p>
+                <img v-for="img in obj.images" :src="img" class="img-fluid rounded-10 w-100 mb-3 shadow-sm"
+                     alt="Картинка">
+            </div>
+        </div>
+
+        <!--        <div class="align-self-center p-5">-->
+        <!--            <ul class="nav justify-content-center">-->
+        <!--                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Телеграм</a></li>-->
+        <!--                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">ВКонтакте</a></li>-->
+        <!--                <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Остальное</a></li>-->
+        <!--            </ul>-->
+        <!--        </div>-->
 
 
-    <div class="align-self-center p-5">
-        <ul class="nav justify-content-center">
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Телеграм</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">ВКонтакте</a></li>
-            <li class="nav-item"><a href="#" class="nav-link px-2 text-body-secondary">Остальное</a></li>
-        </ul>
     </div>
+
+    <Transition name="show-card" mode="out-in" appear>
+        <div class="modal d-block center" v-if="loading">
+            <img :src="getRandomLoadingImage()" class="min-vh-100 min-vw-100" alt="Loading">
+        </div>
+    </Transition>
+
 </div>
-
 <script src="index.js"></script>
 
 </body>
